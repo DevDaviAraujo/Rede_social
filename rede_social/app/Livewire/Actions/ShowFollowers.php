@@ -3,7 +3,7 @@
 namespace App\Livewire\Actions;
 
 use Livewire\Component;
-use App\Models\Users;
+use App\Models\User;
 use App\Models\Interactions;
 
 class ShowFollowers extends Component
@@ -22,7 +22,7 @@ class ShowFollowers extends Component
 
         foreach ($followings as $following) {
 
-            $user = Users::where('id', $following->users_id)->first(); 
+            $user = User::where('id', $following->user_id)->first(); 
             if ($user) {
                 $followers[] = $user; 
             }
@@ -36,7 +36,7 @@ class ShowFollowers extends Component
     public function search_followers($user)
     {
 
-        $user = Users::find($user['id']);
+        $user = User::find($user['id']);
 
         if ($user) {
 
@@ -46,7 +46,7 @@ class ShowFollowers extends Component
 
             foreach ($followings as $following) {
 
-                $user = Users::where('id', $following->users_id)
+                $user = User::where('id', $following->user_id)
                     ->where('nick_name', 'LIKE', '%' . $this->search . '%')
                     ->limit(10)
                     ->first();

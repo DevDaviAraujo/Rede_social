@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne; // Import this for MorphOne
-use App\Models\UsersInfo;
+use App\Models\UserInfo;
 use App\Models\Interactions;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 
-class Users extends Model implements AuthenticatableContract
+class User extends Model implements AuthenticatableContract
 {
     use Authenticatable;
 
@@ -32,13 +32,13 @@ class Users extends Model implements AuthenticatableContract
 
     public function posts() {
 
-        return $this->hasMany(Content::class,'users_id')->where('content_id',null);
+        return $this->hasMany(Content::class,'user_id')->where('content_id',null);
 
     }
 
     public function user_info(): HasOne
     {
-        return $this->hasOne(UsersInfo::class);
+        return $this->hasOne(UserInfo::class);
     }
     public function avatar(): MorphOne
     {
@@ -65,7 +65,7 @@ class Users extends Model implements AuthenticatableContract
 
     public function postsInteractions() {
 
-       return $this->hasMany(Interactions::class, 'users_id')->where('interaction_type','Posts');
+       return $this->hasMany(Interactions::class, 'user_id')->where('interaction_type','Post');
     }
 
 
@@ -77,15 +77,15 @@ class Users extends Model implements AuthenticatableContract
     }
     public function isFollowing($postId){
 
-        $post = Users::find($postId)
-        ->followers->where('users_id',$this->id)
+        $post = User::find($postId)
+        ->followers->where('user_id',$this->id)
         ->first();
 
         if($post) {return true;} else {return false;}
     }
 
     public function followings() {
-        return $this->HasMany( Interactions::class, 'users_id')->where('interaction_type','Users');
+        return $this->HasMany( Interactions::class, 'user_id')->where('interaction_type','User');
     }
 
     public function followersCount() {

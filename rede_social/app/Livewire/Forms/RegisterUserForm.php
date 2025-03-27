@@ -2,7 +2,7 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Component;
-use App\Http\Controllers\Auth\WebsiteControllers\UsersControllers\UsersController;
+use App\Http\Controllers\Auth\WebsiteControllers\UsersControllers\UserController;
 
 class RegisterUserForm extends Component
 {
@@ -25,7 +25,7 @@ class RegisterUserForm extends Component
             'password' => 'required|same:password_confirmation|max:20|min:3',
             'name' => 'required|max:20',
             'last_name' => 'required|max:20',
-            'phone_number' => 'required|min:13|unique:users_info,phone_number'
+            'phone_number' => 'required|min:13|unique:user_info,phone_number'
         ], [
             'required' => 'Preencha o campo.',
             'email' => 'E-mail inválido.',
@@ -38,7 +38,7 @@ class RegisterUserForm extends Component
         ]);
 
         
-        $controller = app(UsersController::class);
+        $controller = app(UserController::class);
         $response = $controller->saveUser([
             'nick_name' => trim($this->nick_name),
             'email' => trim($this->email),
@@ -50,8 +50,12 @@ class RegisterUserForm extends Component
         ]);
 
         $this->returnMessage = $response;
+
+        if($this->returnMessage['status'] == 'success') {
+            redirect()->to('/login')->with('returnMessage',$this->returnMessage);
+        }
         
-        redirect()->to('/login')->with('returnMessage',$this->returnMessage);
+       
     }
 
     public function render()

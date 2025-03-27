@@ -4,7 +4,7 @@ namespace App\Livewire\Actions;
 
 use Livewire\Component;
 use App\Models\Interactions;
-use App\Models\Users;
+use App\Models\User;
 use Auth;
 
 class Follow extends Component
@@ -26,11 +26,11 @@ class Follow extends Component
             return redirect()->to('/login');
         }
 
-        $user = Users::find($user_following_id);
+        $user = User::where('id',$user_following_id)->first();
 
         if ($user->isFollowing($user_followed_id)) {
 
-            $interaction = Users::find($user_followed_id)->followers->where('users_id', $user_following_id)->first();
+            $interaction = User::find($user_followed_id)->followers->where('user_id', $user_following_id)->first();
             $interaction->delete();
 
 
@@ -38,8 +38,8 @@ class Follow extends Component
 
             Interactions::create([
 
-                'users_id' => $user_following_id,
-                'interaction_type' => 'Users',
+                'user_id' => $user_following_id,
+                'interaction_type' => 'User',
                 'interaction_id' => $user_followed_id,
 
             ]);

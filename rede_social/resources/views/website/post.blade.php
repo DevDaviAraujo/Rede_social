@@ -28,7 +28,7 @@
 
             <div class="flex gap-4">
 
-                @if(Auth::check() && Auth::id() == $post->users_id)
+                @if(Auth::check() && Auth::id() == $post->user_id)
 
 
 
@@ -78,12 +78,12 @@
         <div class='grid grid-cols-3 justify-items-center'>
 
             <div class="justify-center justify-items-center">
-                {{$post->enjoyers->count()}}
+                {{$post->getEnjoyers->count()}}
                 @livewire('Actions.likePost', ['postId' => $post->id])
             </div>
 
             <div class="justify-center justify-items-center">
-                {{$post->allComments()->count()}}
+                {{$post->getAllComments()->count()}}
                 <div role='button' data-modal-target="make-comment-modal-{{$post->id}}"
                     data-modal-toggle="make-comment-modal-{{$post->id}}">
                     <svg class="size-6 sm:size-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    @foreach($post->allComments() as $comment)
+    @foreach($post->getAllComments() as $comment)
 
         @include('components.comments', ['comment' => $comment])
 
@@ -142,7 +142,7 @@
             </div>
         </div>
 
-        @foreach($post->validComments() as $comment)
+        @foreach($post->getValidComments() as $comment)
 
             <!-- Main modal -->
             <div id="make-comment-modal-{{$comment->id}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"

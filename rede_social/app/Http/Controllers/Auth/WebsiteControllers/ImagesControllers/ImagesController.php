@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Auth\WebsiteControllers\ImagesControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Images;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -101,7 +101,12 @@ class ImagesController extends Controller
 
                 if ($updating) {
 
-                    $image = Users::find($userId)->avatar->update([
+                    $user = User::where('id',$userId)->first();
+                    $oldFile = $user->avatar->file;
+
+                    Storage::disk('public')->delete('uploads/img/' . $oldFile);
+
+                    $image = $user->avatar->update([
                         'file' => $imageName,
                         'file_type' => $file_type,
                         'width' => $img_width,
@@ -141,7 +146,7 @@ class ImagesController extends Controller
 
     public function update_avatar_image($img_file, $userId)
     {
-        $image = Users::find($userId)->avatar;
+        $image = User::find($userId)->avatar;
         Storage::disk('public')->delete('/uploads/img/' . $image->file);
 
         return app(ImagesController::class)->save_avatar_image($img_file, $userId, true);

@@ -82,7 +82,7 @@
 
             <label class="flex w-full mb-1.5 items-center justify-between text-md font-medium">
 
-                <p class='justify-self-start'>SobreNome</p>
+                <p class='justify-self-start'>Sobre Nome</p>
 
             </label>
 
@@ -174,17 +174,15 @@
                     </div>
                 </div>
             </div>
-        @elseif ($returnMessage['status'] === 'error')
+        @else
             <div class="relative z-0 w-auto animate-popup">
                 <div class="bg-amber-100 rounded-md text-amber-600 p-2.5 shadow-md">
                     <div class="flex items-center">
 
-                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                        <svg class="w-6 h-6 rotate-270" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z" clip-rule="evenodd"/>
+                          </svg>
+                          
 
                         <p class="text-md font-medium ms-2 justify-self-start">{{ $returnMessage['error'] }}</p>
                         
@@ -193,10 +191,5 @@
             </div>
         @endif
     @endisset
-
-
-
-
-
 
 </form>

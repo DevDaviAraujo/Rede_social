@@ -9,7 +9,7 @@ class Interactions extends Model
 {
     protected $fillable = [
 
-        'users_id',
+        'user_id',
         'interaction_type',
         'interaction_id',
         'created_at',
@@ -19,7 +19,7 @@ class Interactions extends Model
 
     public function user() {
 
-        return  Users::where('id', $this->users_id)->get();
+        return  User::where('id', $this->user_id)->get();
 
     }
 

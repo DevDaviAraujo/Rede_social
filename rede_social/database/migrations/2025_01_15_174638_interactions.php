@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('interactions', function (Blueprint $table) {
             $table->id();
             $table->morphs('interaction'); // Posts or Users class
-            $table->unsignedBigInteger('users_id'); // the user that originated the interaction, from where the interaction belongs to
+            $table->unsignedBigInteger('user_id'); // the user that originated the interaction, from where the interaction belongs to
             $table->timestamps();
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

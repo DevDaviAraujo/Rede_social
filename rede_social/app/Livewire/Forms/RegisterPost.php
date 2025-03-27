@@ -47,7 +47,7 @@ class RegisterPost extends Component
 
         $content_controller = app(ContentController::class)->saveContent([
 
-            'users_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'content_id' => null,
             'content_type' => 'Post',
             'content' => $this->content,

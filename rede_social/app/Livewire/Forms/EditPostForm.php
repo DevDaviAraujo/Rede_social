@@ -78,9 +78,9 @@ class EditPostForm extends Component
         $content_controller = app(ContentController::class)->saveContent([
 
             'id' => $this->postId,
-            'users_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'content_id' => null,
-            'content_type' => 'Posts',
+            'content_type' => 'Post',
             'content' => $this->content,
 
         ]);

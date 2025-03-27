@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Auth\WebsiteControllers\UsersControllers;
 use app\Http\Controllers\Auth\WebsiteControllers\ImagesControllers\ImagesController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use App\Models\UsersInfo;
+use App\Models\UserInfo;
 use Illuminate\Support\Facades\DB;
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function saveUser($data)
     {
@@ -20,7 +20,7 @@ class UsersController extends Controller
 
             if (isset($data["id"])) {
 
-                $user = Users::where('id', $data['id'])->first();
+                $user = User::where('id', $data['id'])->first();
                 $info = $user->user_info;
 
                 $user->update([
@@ -41,7 +41,7 @@ class UsersController extends Controller
 
             } else {
 
-                $user = Users::create([
+                $user = User::create([
 
                     'nick_name' => '@' . $data['nick_name'],
                     'email' => $data['email'],
@@ -51,8 +51,8 @@ class UsersController extends Controller
 
                 ]);
 
-                $user_info = UsersInfo::create([
-                    'users_id' => $user->id,
+                UserInfo::create([
+                    'user_id' => $user->id,
                     'name' => $data['name'],
                     'last_name' => $data['last_name'],
                     'phone_number' => $data['phone_number'],

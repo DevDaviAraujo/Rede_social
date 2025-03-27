@@ -13,7 +13,7 @@ class Content extends Model
     protected $fillable = [
 
         'id',
-        'users_id',
+        'user_id',
         'status',
         'content_id',
         'content_type',
@@ -22,6 +22,15 @@ class Content extends Model
         'updated_at'
 
     ];
+
+    public function getRelevance() {
+
+        $likes = $this->getEnjoyers->count();
+        $comments = $this->getAllComments()->count();
+
+        return (($likes * 3) + ($comments * 5))/2;
+
+    }
 
     public function originalcomment() {
 
@@ -47,19 +56,19 @@ class Content extends Model
 
     }
 
-    public function enjoyers(){
+    public function getEnjoyers(){
 
         return $this->morphMany( Interactions::class, 'interaction');
 
     }
 
-    public function validComments() {
+    public function getValidComments() {
 
         return $this->where('content_id',$this->id)->where('content_type','Comment')->where('status',true)->get();
 
     }
 
-    public function allComments() {
+    public function getAllComments() {
 
         return $this->where('content_id',$this->id)->where('content_type','Comment')->get();
 
@@ -67,7 +76,7 @@ class Content extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(Users::class, 'users_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function images(): MorphMany

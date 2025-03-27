@@ -79,12 +79,12 @@
     <div class='grid grid-cols-3 justify-items-center'>
 
         <div class="justify-center justify-items-center @if(!$comment->status) cursor-not-allowed @endif" @if(!$comment->status) disabled @endif >
-            {{$comment->enjoyers->count()}}
+            {{$comment->getEnjoyers->count()}}
             @livewire('Actions.likePost', ['postId' => $comment->id])
         </div>
 
         <div class="justify-center justify-items-center ">
-            {{$comment->allComments()->count()}}
+            {{$comment->getAllComments()->count()}}
             <div class="@if(!$comment->status) cursor-not-allowed @endif" @if(!$comment->status) disabled @endif role='button' data-modal-target="make-comment-modal-{{$comment->id}}"
                 data-modal-toggle="make-comment-modal-{{$comment->id}}">
                 <svg class="size-6 sm:size-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        @if($comment->allComments()->count() >= 1)
+        @if($comment->getAllComments()->count() >= 1)
             <div class="justify-center justify-items-center">
                 <br>
                 <div role='button' id="showChildComments-{{$comment->id}}">
@@ -105,7 +105,7 @@
         @endif
 
     </div>
-    @foreach($comment->allComments() as $comment)
+    @foreach($comment->getAllComments() as $comment)
 
         <div id="childComments_container-{{$comment->id}}" class="hidden bg-gray-700 ps-3">   
 

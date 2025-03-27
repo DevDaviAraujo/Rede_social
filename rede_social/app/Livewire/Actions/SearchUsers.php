@@ -3,7 +3,7 @@
 namespace App\Livewire\Actions;
 
 use Livewire\Component;
-use App\Models\Users;
+use App\Models\User;
 
 class SearchUsers extends Component
 {
@@ -19,7 +19,7 @@ class SearchUsers extends Component
     public function search_user()
     {
 
-        $this->users = Users::where('nick_name', 'like', '%' . $this->search . "%")->limit(6)->get();
+        $this->users = User::where('nick_name', 'like', '%' . $this->search . "%")->limit(6)->get();
 
         if ($this->search == "") {
             $this->users = [];

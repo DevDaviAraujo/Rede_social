@@ -6,7 +6,7 @@
 
         <div class="p-1 border-r border-indigo-200 ">
 
-            <div class="px-1 py-2 rounded bg-gray-700 items-start place-content-center h-full">
+            <div class="px-1 py-2 rounded bg-gray-700 justify-items-center h-full"> 
 
 
                 <img class="w-16 h-16 rounded-full border-2 border-indigo-200" src="{{$user->getAvatar()}}">
@@ -16,11 +16,11 @@
                     @if($user->isOnline())
 
                         <p
-                            class=" font-normal text-slate-50 rounded-full align-self-center bg-emerald-400 px-1 flex items-center w-fit">
+                            class=" font-normal text-sm text-slate-50 rounded-full align-self-center bg-emerald-400 px-1 flex items-center w-fit">
                             online
                         </p>
                     @else
-                        <p class="  text-slate-50 rounded-full bg-slate-400 px-1 flex items-center w-fit">
+                        <p class=" font-normal text-sm text-slate-50 rounded-full bg-slate-400 px-1 flex items-center w-fit">
                             offline
                         </p>
                     @endif
@@ -116,14 +116,7 @@
     </div>
 
 
-    @foreach($user->posts as $index => $post)
-
-        
-            @include('components.posts', ['post' => $post])
-        
-
-    @endforeach
-
+    @livewire('actions.order-content', ['user' => $user])
 
     @if(Auth::check())
         @if(Auth::user()->id == $user->id)

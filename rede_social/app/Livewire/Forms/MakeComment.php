@@ -24,7 +24,7 @@ class MakeComment extends Component
 
         $content_controller = app(ContentController::class)->saveContent([
 
-            'users_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'content_id' => $this->postId,
             'content_type' => 'Comment',
             'content' => $this->content,

@@ -216,10 +216,9 @@
 
 
                 <button type="submit"
-                    class="w-full sm:w-auto flex place-content-center items-center gap-2 transition-transform duration-200 ease-in-out text-slate-50 text-md font-medium bg-indigo-700 shadow-xl active:shadow-lg active:bg-indigo-800 border-b-4 border-indigo-800 active:border-b-2 active:scale-95 rounded-lg px-5 py-2.5 "
-                    wire:loading.attr="disabled" wire:loading.class="">
+                    class="w-full sm:w-auto flex place-content-center items-center gap-2 transition-transform duration-200 ease-in-out text-slate-50 text-md font-medium bg-indigo-700 shadow-xl active:shadow-lg active:bg-indigo-800 border-b-4 border-indigo-800 active:border-b-2 active:scale-95 rounded-lg px-5 py-2.5 ">
                     Enviar
-                    <div wire:loading role="status">
+                    <div wire:loading wire:target="update_user" role="status">
                         <svg aria-hidden="true" class="h-4 w-4 text-md text-slate-50 animate-spin fill-indigo-700"
                             viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path

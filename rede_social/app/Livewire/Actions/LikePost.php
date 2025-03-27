@@ -18,9 +18,9 @@ class LikePost extends Component
 
     public function removeLike($postId) {
 
-        Interactions::where('interaction_type','Posts')
+        Interactions::where('interaction_type','Post')
         ->where('interaction_id',$postId)
-        ->where('Users_id',Auth::user()->id)
+        ->where('user_id',Auth::user()->id)
         ->delete();
 
     }
@@ -31,8 +31,8 @@ class LikePost extends Component
         }
 
         Interactions::create([
-            'users_id' => Auth::user()->id,
-            'interaction_type' => 'Posts',
+            'user_id' => Auth::user()->id,
+            'interaction_type' => 'Post',
             'interaction_id' => $postId
 
         ]);

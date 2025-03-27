@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UsersInfo extends Model
+class UserInfo extends Model
 {
 
-    protected $table = 'users_info';
+    protected $table = 'user_info';
     protected $fillable = [
 
         'id',
-        'users_id',
+        'user_id',
         'name',
         'last_name',
         'gender',

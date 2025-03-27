@@ -22,7 +22,7 @@ class ContentController extends Controller
                 Content::where('id', $data['id'])
                 ->update([
 
-                    'users_id' => $data['users_id'],
+                    'user_id' => $data['user_id'],
                     'content_id' => $data['content_id'],
                     'content_type' => $data['content_type'],
                     'content' => $data['content'],
@@ -35,7 +35,7 @@ class ContentController extends Controller
 
             $post = Content::create([
 
-                'users_id' => $data['users_id'],
+                'user_id' => $data['user_id'],
                 'content_id' => $data['content_id'],
                 'content_type' => $data['content_type'],
                 'content' => $data['content'],

@@ -3,8 +3,8 @@ namespace App\Livewire\Forms;
 
 use App\Http\Controllers\Auth\WebsiteControllers\ImagesControllers\ImagesController;
 use Livewire\Component;
-use App\Models\Users;
-use App\Http\Controllers\Auth\WebsiteControllers\UsersControllers\UsersController;
+use App\Models\User;
+use App\Http\Controllers\Auth\WebsiteControllers\UsersControllers\UserController;
 use Livewire\WithFileUploads;
 
 class EditUserForm extends Component
@@ -40,7 +40,7 @@ class EditUserForm extends Component
             'bio' => 'required',
             'name' => 'required|max:20',
             'last_name' => 'required|max:20',
-            'phone_number' => 'required|unique:users_info,phone_number,'.$this->user->user_info->id.'|min:13'
+            'phone_number' => 'required|unique:user_info,phone_number,'.$this->user->user_info->id.'|min:13'
         ], [
             'required' => 'Preencha o campo.',
             'email' => 'E-mail inválido.',
@@ -50,7 +50,7 @@ class EditUserForm extends Component
         ]);
 
 
-        $user_controller = app(UsersController::class)->saveUser([
+        $user_controller = app(UserController::class)->saveUser([
             'id' => $this->user->id,
             'email' => trim($this->email),
             'bio' => $this->bio,
@@ -64,7 +64,7 @@ class EditUserForm extends Component
 
         if ($this->image) {
 
-            $user = Users::find($this->user->id);
+            $user = User::find($this->user->id);
             
             if ($user->avatar) {
 

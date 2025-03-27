@@ -5,7 +5,7 @@
         <div class='flex justify-between my-1 w-full'>
             <a href="/user/{{ $post->user->nick_name }}"
                 class="flex items-center gap-2 w-fit text-lg justify-self-start">
-                <img class="w-9 h-9 rounded-full border-2 border-indigo-200" src="{{ $post->user->getAvatar() }}">
+                <img class="w-9 h-9 rounded-full border-2 border-indigo-200" loading="lazy" src="{{ $post->user->getAvatar() }}">
                 <div class=" font-normal grid w-auto ">
 
                     <div class="justify-self-start text-base font-medium sm:block truncate">
@@ -39,12 +39,12 @@
         <div class='grid grid-cols-3 justify-items-center'>
 
             <div class="justify-center justify-items-center">
-                {{$post->enjoyers->count()}}
+                {{$post->getEnjoyers->count()}}
                 @livewire('Actions.likePost', ['postId' => $post->id])
             </div>
 
             <div class="justify-center justify-items-center">
-                {{$post->allComments()->count()}}
+                {{$post->getAllComments()->count()}}
                 <div role='button' data-modal-target="make-comment-modal-{{$post->id}}"
                     data-modal-toggle="make-comment-modal-{{$post->id}}">
                     <svg class="size-6 sm:size-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
